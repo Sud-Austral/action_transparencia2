@@ -22,6 +22,7 @@ PersonalContratohonorariosDICT    = deseadas+['remuliquida_mensual','tipo_pago',
 
 
 def getDF(url,columnas):
+    #return pd.read_csv(url, low_memory=False,sep=";",encoding="latin",usecols=columnas)
     return pd.read_csv(url, low_memory=False,sep=";",encoding="latin",usecols=columnas)
 
 def eliminar_espacios_adicionales(cadena):
@@ -82,4 +83,6 @@ def consolidar():
 
 
 if __name__ == '__main__':
-    getDF(TA_PersonalPlanta              ,PersonalPlantaDICT).to_csv("test.csv", index=False)
+    print("Empezando")
+    getDF(TA_PersonalContratohonorarios              ,PersonalContratohonorariosDICT ).to_csv("test.csv", index=False)
+    print("terminando")
