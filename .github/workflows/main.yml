@@ -26,7 +26,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         echo "Vamos a lo importante...1"    
-        python test.py
+        #python test.py
+        sudo apt-get install axel
+        axel https://repositoriodeis.minsal.cl/SistemaAtencionesUrgencia/AtencionesUrgencia2024.zip
+        
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
