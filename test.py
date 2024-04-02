@@ -82,4 +82,4 @@ def consolidar():
 
 
 if __name__ == '__main__':
-    consolidar()
+    getDF(TA_PersonalPlanta              ,PersonalPlantaDICT).to_csv("test.csv", index=False)
