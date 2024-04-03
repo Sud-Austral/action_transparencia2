@@ -10,7 +10,7 @@ on:
   #  At 00:00 on Saturday
 
 jobs:
-  build:
+  build1:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,9 +28,63 @@ jobs:
         name: shared-files
         path: |
           TA_PersonalPlanta.csv
+  build2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: AUTOMATIZACIÓN
+      run: |
+        echo "Vamos a lo importante...1"    
+        #python test.py
+        wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContrata.csv
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: shared-files
+        path: |
+          TA_PersonalContrata.csv
+  build3:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: AUTOMATIZACIÓN
+      run: |
+        echo "Vamos a lo importante...1"    
+        #python test.py
+        wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalCodigotrabajo.csv
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: shared-files
+        path: |
+          TA_PersonalCodigotrabajo.csv
+  build4:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: AUTOMATIZACIÓN
+      run: |
+        echo "Vamos a lo importante...1"    
+        #python test.py
+        wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContratohonorarios.csv
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: shared-files
+        path: |
+          TA_PersonalContratohonorarios.csv
   unir:
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [build1,build2,build3,build4]
     strategy:
       matrix:
         python-version: [3.7]
@@ -52,11 +106,12 @@ jobs:
 
       - name: AUTOMATIZACIÓN
         run: |
+          ls shared/
           cp shared/* .
           #python -m pip install --upgrade pip
           #pip install -r requirements.txt
           ls
-          #python unir.py  
+          python test.py  
       
       - name: Commit y push cambios
         uses: stefanzweifel/git-auto-commit-action@v2
