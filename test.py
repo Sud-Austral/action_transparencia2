@@ -84,5 +84,7 @@ def consolidar():
 
 if __name__ == '__main__':
     print("Empezando")
-    getDF(TA_PersonalContratohonorarios              ,PersonalContratohonorariosDICT ).to_csv("test.csv", index=False)
+    df = getDF("shared/TA_PersonalPlanta.csv",PersonalContratohonorariosDICT )
+    print(df.columns)
+    print(df.describe())
     print("terminando")
