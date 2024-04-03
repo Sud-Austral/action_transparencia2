@@ -1,6 +1,20 @@
 import pandas as pd
 from datetime import datetime
 import re
+import os
+
+def getFiles(carpeta):
+    salida = []
+    for archivo in os.listdir(carpeta):
+        # Obtén la ruta completa del archivo
+        ruta_completa = os.path.join(carpeta, archivo)
+        # Verifica si es un archivo (y no una subcarpeta)
+        if os.path.isfile(ruta_completa):
+            # Haz algo con el archivo, por ejemplo, imprimir su nombre
+            print(archivo)
+            salida.append(archivo)
+    return salida
+
 
 date_format = "%Y/%m/%d"
 
@@ -83,8 +97,4 @@ def consolidar():
 
 
 if __name__ == '__main__':
-    print("Empezando")
-    df = getDF("shared/TA_PersonalPlanta.csv",PersonalContratohonorariosDICT )
-    print(df.columns)
-    print(df.describe())
-    print("terminando")
+    print(getFiles("shared"))
