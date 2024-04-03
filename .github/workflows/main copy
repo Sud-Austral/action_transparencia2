@@ -10,36 +10,117 @@ on:
   #  At 00:00 on Saturday
 
 jobs:
-  build:
+  build1:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.7]
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
     - name: AUTOMATIZACIÓN
       run: |
-        echo "Actions Publicadas, Cerradas"
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        echo "Vamos a lo importante... 1"  
-        cp shared/* .
-
-    - uses: stefanzweifel/git-auto-commit-action@v2
+        echo "Vamos a lo importante...1"    
+        #python test.py
+        wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
       with:
-        commit_message: "Actualizacion"
-        branch: main
-        # Optional glob pattern of files which should be added to the commit
-        #file_pattern: /
-        # Optional local file path to the repository
-        repository: .
+        name: shared-files
+        path: |
+          TA_PersonalPlanta.csv
+  build2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: AUTOMATIZACIÓN
+      run: |
+        echo "Vamos a lo importante...1"    
+        #python test.py
+        wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContrata.csv
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: shared-files
+        path: |
+          TA_PersonalContrata.csv
+  build3:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: AUTOMATIZACIÓN
+      run: |
+        echo "Vamos a lo importante...1"    
+        #python test.py
+        wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalCodigotrabajo.csv
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: shared-files
+        path: |
+          TA_PersonalCodigotrabajo.csv
+  build4:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: AUTOMATIZACIÓN
+      run: |
+        echo "Vamos a lo importante...1"    
+        #python test.py
+        wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContratohonorarios.csv
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: shared-files
+        path: |
+          TA_PersonalContratohonorarios.csv
+  unir:
+    runs-on: ubuntu-latest
+    needs: [build1,build2,build3,build4]
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v2
 
-        # Optional commit user and author settings
-        commit_user_name: Actions Bot
-        commit_user_email: lmonsalve22@gmail.com
-        commit_author: DataIntelligence BOT <lmonsalve22@gmail.com>
-        push_options: '--force'
+      - name: Configurar Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: shared-files
+          path: shared
+
+      - name: AUTOMATIZACIÓN
+        run: |
+          ls shared/
+          cp shared/* .
+          #python -m pip install --upgrade pip
+          #pip install -r requirements.txt
+          ls
+          python test.py  
+      
+      - name: Commit y push cambios
+        uses: stefanzweifel/git-auto-commit-action@v2
+        with:
+          commit_message: "Actualizacion"
+          branch: main
+          commit_user_name: Actions Bot
+          commit_user_email: lmonsalve22@gmail.com
+          commit_author: DataIntelligence BOT <lmonsalve22@gmail.com>
+          push_options: '--force'
+
+   

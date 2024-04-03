@@ -3,17 +3,8 @@ from datetime import datetime
 import re
 import os
 
-def getFiles(carpeta):
-    salida = []
-    for archivo in os.listdir(carpeta):
-        # Obtén la ruta completa del archivo
-        ruta_completa = os.path.join(carpeta, archivo)
-        # Verifica si es un archivo (y no una subcarpeta)
-        if os.path.isfile(ruta_completa):
-            # Haz algo con el archivo, por ejemplo, imprimir su nombre
-            print(archivo)
-            salida.append(archivo)
-    return salida
+
+
 
 
 date_format = "%Y/%m/%d"
@@ -34,6 +25,29 @@ PersonalCodigotrabajoDICT         = deseadas+["remuliquida_mensual",'Tipo cargo'
 PersonalContratohonorariosDICT    = deseadas+['remuliquida_mensual','tipo_pago','num_cuotas','remuneracionbruta']
 ##PersonalContratohonorarios = PersonalContratohonorarios.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
 
+def getFiles(carpeta):
+    salida = []
+    for archivo in os.listdir(carpeta):
+        # Obtén la ruta completa del archivo
+        ruta_completa = os.path.join(carpeta, archivo)
+        # Verifica si es un archivo (y no una subcarpeta)
+        if os.path.isfile(ruta_completa):
+            # Haz algo con el archivo, por ejemplo, imprimir su nombre
+            print(archivo)
+            salida.append(archivo)
+    return salida
+
+def readCSV(nombreFile):
+    if(nombreFile == "TA_PersonalPlanta.csv"):
+        df = pd.read_csv(f"shared/{nombreFile}", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
+    elif(nombreFile == "TA_PersonalContrata.csv"):
+        df = pd.read_csv(f"shared/{nombreFile}", low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
+    elif(nombreFile == "TA_PersonalCodigotrabajo.csv"):
+        df = pd.read_csv(f"shared/{nombreFile}", low_memory=False,sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
+    elif(nombreFile == "TA_PersonalContratohonorarios.csv"):
+        df = pd.read_csv(f"shared/{nombreFile}", low_memory=False,sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
+        df = df.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
+    return df
 
 def getDF(url,columnas):
     #return pd.read_csv(url, low_memory=False,sep=";",encoding="latin",usecols=columnas)
@@ -97,4 +111,14 @@ def consolidar():
 
 
 if __name__ == '__main__':
-    print(getFiles("shared"))
+    listaDF = [readCSV(name) for name in getFiles("shared")]
+    personal = pd.concat(listaDF)
+    personal["remuneracionbruta_mensual"] = personal["remuneracionbruta_mensual"].apply(getFloat)
+    personal["remuliquida_mensual"] = personal["remuliquida_mensual"].apply(getFloat)
+    personal["Nombres2"] = personal["Nombres"].apply(eliminar_espacios_adicionales)
+    personal["NOMBRECOMPLETO"] = personal.apply(getFullName,axis=1)
+    personal["Nombres2"] = personal["Nombres2"].apply(transformar_string) 
+    personal["NOMBRECOMPLETO2"] = personal["NOMBRECOMPLETO"].apply(transformar_string) 
+    for i in personal["organismo_nombre"].unique()[:5]:
+        organismo = personal2[personal2["organismo_nombre"] == i]
+        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
