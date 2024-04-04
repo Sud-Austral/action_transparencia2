@@ -111,14 +111,20 @@ def consolidar():
 
 
 if __name__ == '__main__':
+    print(1)
     listaDF = [readCSV(name) for name in getFiles("shared")]
+    print(2)
     personal = pd.concat(listaDF)
+    print(3)
     personal["remuneracionbruta_mensual"] = personal["remuneracionbruta_mensual"].apply(getFloat)
     personal["remuliquida_mensual"] = personal["remuliquida_mensual"].apply(getFloat)
     personal["Nombres2"] = personal["Nombres"].apply(eliminar_espacios_adicionales)
     personal["NOMBRECOMPLETO"] = personal.apply(getFullName,axis=1)
     personal["Nombres2"] = personal["Nombres2"].apply(transformar_string) 
     personal["NOMBRECOMPLETO2"] = personal["NOMBRECOMPLETO"].apply(transformar_string) 
+    print(4)
     for i in personal["organismo_nombre"].unique()[:15]:
         organismo = personal[personal["organismo_nombre"] == i]
         organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+    print(5)
+    
