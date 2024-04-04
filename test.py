@@ -119,6 +119,6 @@ if __name__ == '__main__':
     personal["NOMBRECOMPLETO"] = personal.apply(getFullName,axis=1)
     personal["Nombres2"] = personal["Nombres2"].apply(transformar_string) 
     personal["NOMBRECOMPLETO2"] = personal["NOMBRECOMPLETO"].apply(transformar_string) 
-    for i in personal["organismo_nombre"].unique():
+    for i in personal["organismo_nombre"].unique()[:15]:
         organismo = personal[personal["organismo_nombre"] == i]
         organismo.to_excel(f"organismo/{i}.xlsx", index=False)
