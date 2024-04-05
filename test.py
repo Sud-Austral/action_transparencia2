@@ -112,19 +112,28 @@ def consolidar():
 
 if __name__ == '__main__':
     print(1)
-    listaDF = [readCSV(name) for name in getFiles("shared")]
+    #listaDF = [readCSV(name) for name in getFiles("shared")]
+    
+    #personal = pd.concat(listaDF)
+    df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
     print(2)
-    personal = pd.concat(listaDF)
+    df2 = pd.read_csv("shared/TA_PersonalContrata.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
     print(3)
+    df3 = pd.read_csv("shared/TA_PersonalCodigotrabajo.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
+    print(4)
+    df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
+    df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
+    personal = pd.concat([df1,df2,df3,df4])
+    print(5)
     personal["remuneracionbruta_mensual"] = personal["remuneracionbruta_mensual"].apply(getFloat)
     personal["remuliquida_mensual"] = personal["remuliquida_mensual"].apply(getFloat)
     personal["Nombres2"] = personal["Nombres"].apply(eliminar_espacios_adicionales)
     personal["NOMBRECOMPLETO"] = personal.apply(getFullName,axis=1)
     personal["Nombres2"] = personal["Nombres2"].apply(transformar_string) 
     personal["NOMBRECOMPLETO2"] = personal["NOMBRECOMPLETO"].apply(transformar_string) 
-    print(4)
+    print(6)
     for i in personal["organismo_nombre"].unique()[:15]:
         organismo = personal[personal["organismo_nombre"] == i]
         organismo.to_excel(f"organismo/{i}.xlsx", index=False)
-    print(5)
+    print(7)
     
