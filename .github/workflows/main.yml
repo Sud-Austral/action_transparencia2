@@ -20,7 +20,7 @@ jobs:
       run: |
         echo "Vamos a lo importante...1"    
         #python test.py
-        #wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv
+        wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv
         
     - name: Upload artifact
       uses: actions/upload-artifact@v2
