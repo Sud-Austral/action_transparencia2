@@ -115,7 +115,7 @@ if __name__ == '__main__':
     #listaDF = [readCSV(name) for name in getFiles("shared")]
     
     #personal = pd.concat(listaDF)
-    df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
+    #df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
     print(2)
     df2 = pd.read_csv("shared/TA_PersonalContrata.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
     print(3)
@@ -123,7 +123,7 @@ if __name__ == '__main__':
     print(4)
     df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
-    personal = pd.concat([df1,df2,df3,df4])
+    personal = pd.concat([df2,df3,df4])
     print(5)
     personal["remuneracionbruta_mensual"] = personal["remuneracionbruta_mensual"].apply(getFloat)
     personal["remuliquida_mensual"] = personal["remuliquida_mensual"].apply(getFloat)
