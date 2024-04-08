@@ -116,14 +116,26 @@ if __name__ == '__main__':
     
     #personal = pd.concat(listaDF)
     df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
+    for i in df1["organismo_nombre"].unique()[:15]:
+        organismo = df1[df1["organismo_nombre"] == i]
+        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     print(2)
     df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
     print(3)
+    for i in df2["organismo_nombre"].unique()[:15]:
+        organismo = df2[df2["organismo_nombre"] == i]
+        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     df3 = pd.read_csv("shared/TA_PersonalCodigotrabajo.csv", sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
     print(4)
+    for i in df3["organismo_nombre"].unique()[:15]:
+        organismo = df3[df3["organismo_nombre"] == i]
+        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
-    personal = pd.concat([df1,df2,df3,df4])
+    for i in df1["organismo_nombre"].unique()[:15]:
+        organismo = df4[df4["organismo_nombre"] == i]
+        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+    #personal = pd.concat([df1,df2,df3,df4])
     #personal = pd.concat([df1])
     print(5)
     #personal["remuneracionbruta_mensual"] = personal["remuneracionbruta_mensual"].apply(getFloat)
@@ -133,8 +145,8 @@ if __name__ == '__main__':
     #personal["Nombres2"] = personal["Nombres2"].apply(transformar_string) 
     #personal["NOMBRECOMPLETO2"] = personal["NOMBRECOMPLETO"].apply(transformar_string) 
     print(6)
-    for i in personal["organismo_nombre"].unique()[:15]:
-        organismo = personal[personal["organismo_nombre"] == i]
-        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+    #for i in personal["organismo_nombre"].unique()[:15]:
+    #    organismo = personal[personal["organismo_nombre"] == i]
+    #    organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     print(7)
     
