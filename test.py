@@ -108,6 +108,16 @@ def consolidar():
         organismo = personal[personal["organismo_nombre"] == i]
         organismo.to_excel(f"organismo/{i}.xlsx", index=False)
 
+def addColumns(personal):
+    personal["remuneracionbruta_mensual"] = personal["remuneracionbruta_mensual"].apply(getFloat)
+    personal["remuliquida_mensual"] = personal["remuliquida_mensual"].apply(getFloat)
+    personal["Nombres2"] = personal["Nombres"].apply(eliminar_espacios_adicionales)
+    personal["NOMBRECOMPLETO"] = personal.apply(getFullName,axis=1)
+    personal["Nombres2"] = personal["Nombres2"].apply(transformar_string) 
+    personal["NOMBRECOMPLETO2"] = personal["NOMBRECOMPLETO"].apply(transformar_string) 
+    return personal
+
+
 
 
 if __name__ == '__main__':
@@ -116,28 +126,42 @@ if __name__ == '__main__':
     
     #personal = pd.concat(listaDF)
     df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    for i in df1["organismo_nombre"].unique()[:15]:
+    df1 = addColumns(df1)
+    for i in df1["organismo_nombre"].unique():
         organismo = df1[df1["organismo_nombre"] == i]
         organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     print(2)
     df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
+    df2 = addColumns(df2)
     print(3)
-    for i in df2["organismo_nombre"].unique()[:15]:
-        aux = pd.read_excel(f"organismo/{i}.xlsx")
+    for i in df2["organismo_nombre"].unique():
         organismo = df2[df2["organismo_nombre"] == i]
-        pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
+        try:
+            aux = pd.read_excel(f"organismo/{i}.xlsx")
+            pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
+        except:
+            pd.concat([organismo]).to_excel(f"organismo/{i}.xlsx", index=False)
+
     df3 = pd.read_csv("shared/TA_PersonalCodigotrabajo.csv", sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
+    df3 = addColumns(df3)
     print(4)
     for i in df3["organismo_nombre"].unique()[:15]:
-        aux = pd.read_excel(f"organismo/{i}.xlsx")
-        organismo = df3[df3["organismo_nombre"] == i]
-        pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
+        organismo = df3[df["organismo_nombre"] == i]
+        try:
+            aux = pd.read_excel(f"organismo/{i}.xlsx")
+            pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
+        except:
+            pd.concat([organismo]).to_excel(f"organismo/{i}.xlsx", index=False)
     df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
+    df4 = addColumns(df4)
     for i in df1["organismo_nombre"].unique()[:15]:
-        aux = pd.read_excel(f"organismo/{i}.xlsx")
         organismo = df4[df4["organismo_nombre"] == i]
-        pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
+        try:
+            aux = pd.read_excel(f"organismo/{i}.xlsx")
+            pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
+        except:
+            pd.concat([organismo]).to_excel(f"organismo/{i}.xlsx", index=False)
     #personal = pd.concat([df1,df2,df3,df4])
     #personal = pd.concat([df1])
     print(5)
