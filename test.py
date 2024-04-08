@@ -125,19 +125,19 @@ if __name__ == '__main__':
     for i in df2["organismo_nombre"].unique()[:15]:
         aux = pd.read_excel(f"organismo/{i}.xlsx")
         organismo = df2[df2["organismo_nombre"] == i]
-        pd.concat([organismo,aux])organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+        pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
     df3 = pd.read_csv("shared/TA_PersonalCodigotrabajo.csv", sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
     print(4)
     for i in df3["organismo_nombre"].unique()[:15]:
         aux = pd.read_excel(f"organismo/{i}.xlsx")
         organismo = df3[df3["organismo_nombre"] == i]
-        pd.concat([organismo,aux])organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+        pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
     df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
     for i in df1["organismo_nombre"].unique()[:15]:
         aux = pd.read_excel(f"organismo/{i}.xlsx")
         organismo = df4[df4["organismo_nombre"] == i]
-        pd.concat([organismo,aux])organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+        pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
     #personal = pd.concat([df1,df2,df3,df4])
     #personal = pd.concat([df1])
     print(5)
