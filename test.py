@@ -152,7 +152,7 @@ if __name__ == '__main__':
     #personal = pd.concat(listaDF)
     df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
     df1 = addColumns(df1)
-    for i in df1["organismo_nombre"].unique():
+    for i in df1["organismo_nombre"].unique()[:15]:
         organismo = df1[df1["organismo_nombre"] == i]
         organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     print(2)
@@ -161,7 +161,7 @@ if __name__ == '__main__':
     df2 = addColumns(df2)
     print(3)
     
-    for i in df2["organismo_nombre"].unique():
+    for i in df2["organismo_nombre"].unique()[:15]:
         organismo = df2[df2["organismo_nombre"] == i]
         try:
             aux = pd.read_excel(f"organismo/{i}.xlsx")
