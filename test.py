@@ -145,7 +145,7 @@ if __name__ == '__main__':
     directory = "/home/runner/runners"
 
     # Llamar a la función para eliminar archivos de registro antiguos
-    delete_old_logs(directory)
+    #delete_old_logs(directory)
     print(1)
     #listaDF = [readCSV(name) for name in getFiles("shared")]
     
@@ -156,7 +156,7 @@ if __name__ == '__main__':
         organismo = df1[df1["organismo_nombre"] == i]
         organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     print(2)
-    delete_old_logs(directory)
+    #delete_old_logs(directory)
     df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
     df2 = addColumns(df2)
     print(3)
@@ -168,7 +168,7 @@ if __name__ == '__main__':
             pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
         except:
             pd.concat([organismo]).to_excel(f"organismo/{i}.xlsx", index=False)
-    delete_old_logs(directory)
+    #delete_old_logs(directory)
     df3 = pd.read_csv("shared/TA_PersonalCodigotrabajo.csv", sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
     df3 = addColumns(df3)
     print(4)
@@ -179,7 +179,7 @@ if __name__ == '__main__':
             pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
         except:
             pd.concat([organismo]).to_excel(f"organismo/{i}.xlsx", index=False)
-    delete_old_logs(directory)
+    #delete_old_logs(directory)
     df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
     df4 = addColumns(df4)
