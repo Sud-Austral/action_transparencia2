@@ -2,7 +2,28 @@ import pandas as pd
 from datetime import datetime
 import re
 import os
+import time
 
+
+def delete_old_logs(directory, file_extension=".log", days_old=7):
+    # Obtener la fecha actual
+    current_time = time.time()
+    # Convertir los días a segundos
+    age_in_seconds = days_old * 24 * 60 * 60
+    
+    # Iterar sobre los archivos en el directorio
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith(file_extension):
+                # Obtener la ruta completa del archivo
+                file_path = os.path.join(root, file)
+                # Obtener la fecha de modificación del archivo
+                file_mtime = os.path.getmtime(file_path)
+                # Calcular la antigüedad del archivo en segundos
+                file_age = current_time - file_mtime
+                # Si el archivo es más antiguo que el límite, eliminarlo
+                if file_age > age_in_seconds:
+                    os.remove(file_path)
 
 
 
@@ -121,6 +142,10 @@ def addColumns(personal):
 
 
 if __name__ == '__main__':
+    directory = "/home/runner/runners"
+
+    # Llamar a la función para eliminar archivos de registro antiguos
+    delete_old_logs(directory)
     print(1)
     #listaDF = [readCSV(name) for name in getFiles("shared")]
     
@@ -131,9 +156,11 @@ if __name__ == '__main__':
         organismo = df1[df1["organismo_nombre"] == i]
         organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     print(2)
+    delete_old_logs(directory)
     df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
     df2 = addColumns(df2)
     print(3)
+    
     for i in df2["organismo_nombre"].unique():
         organismo = df2[df2["organismo_nombre"] == i]
         try:
@@ -141,7 +168,7 @@ if __name__ == '__main__':
             pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
         except:
             pd.concat([organismo]).to_excel(f"organismo/{i}.xlsx", index=False)
-
+    delete_old_logs(directory)
     df3 = pd.read_csv("shared/TA_PersonalCodigotrabajo.csv", sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
     df3 = addColumns(df3)
     print(4)
@@ -152,6 +179,7 @@ if __name__ == '__main__':
             pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
         except:
             pd.concat([organismo]).to_excel(f"organismo/{i}.xlsx", index=False)
+    delete_old_logs(directory)
     df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
     df4 = addColumns(df4)
