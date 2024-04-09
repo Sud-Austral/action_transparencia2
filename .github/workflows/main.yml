@@ -82,9 +82,19 @@ jobs:
         name: shared-files
         path: |
           TA_PersonalContratohonorarios.csv
-  unir:
+
+  cleanup:
     runs-on: ubuntu-latest
     needs: [build1,build2,build3,build4]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Delete old log files
+      run: |
+        find /home/runner/runners -name "*.log" -mtime +7 -exec rm {} \;
+  unir:
+    runs-on: ubuntu-latest
+    needs: [cleanup]
     strategy:
       matrix:
         python-version: [3.7]
