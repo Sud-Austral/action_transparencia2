@@ -145,6 +145,11 @@ def addColumns(personal):
 #    print("Todo bien prueba 1")
 #    getFiles("shared/")
 
+def saveParcial(df,columna):
+    organismo = df1[df1["organismo_nombre"] == columna]
+    organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+    return 
+
 
 if __name__ == '__main__':
     directory = "/home/runner/runners"
@@ -157,9 +162,10 @@ if __name__ == '__main__':
     #personal = pd.concat(listaDF)
     df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
     df1 = addColumns(df1)
-    for i in df1["organismo_nombre"].unique():
-        organismo = df1[df1["organismo_nombre"] == i]
-        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+    [saveParcial(df1,x) for x in df1["organismo_nombre"].unique()]
+    #for i in df1["organismo_nombre"].unique():
+    #    organismo = df1[df1["organismo_nombre"] == i]
+    #    organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     print(2)
     #delete_old_logs(directory)
 
