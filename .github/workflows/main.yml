@@ -128,7 +128,7 @@ jobs:
           tar -xzvf TA_PersonalPlanta.tar.gz
           tar -xzvf TA_PersonalContrata.tar.gz
           tar -xzvf TA_PersonalCodigotrabajo.tar.gz
-          tar -xzvf TA_PersonalContratohonorarios.tar.gz
+          #tar -xzvf TA_PersonalContratohonorarios.tar.gz
           ls
           cd ..
           python -m pip install --upgrade pip
