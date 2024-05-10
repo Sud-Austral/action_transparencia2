@@ -162,10 +162,15 @@ if __name__ == '__main__':
     #personal = pd.concat(listaDF)
     df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
     df1 = addColumns(df1)
-    [saveParcial(df1,x) for x in df1["organismo_nombre"].unique()]
-    #for i in df1["organismo_nombre"].unique():
-    #    organismo = df1[df1["organismo_nombre"] == i]
-    #    organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+    df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
+    df2 = addColumns(df2)
+
+    merge = pd.concat([df1,df2])
+
+    #[saveParcial(df1,x) for x in df1["organismo_nombre"].unique()]
+    for i in merge["organismo_nombre"].unique():
+        organismo = merge[merge["organismo_nombre"] == i]
+        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     print(2)
     #delete_old_logs(directory)
 
