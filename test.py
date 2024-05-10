@@ -75,6 +75,7 @@ def getDF(url,columnas):
     #return pd.read_csv(url, low_memory=False,sep=";",encoding="latin",usecols=columnas)
     return pd.read_csv(url, low_memory=False,sep=";",encoding="latin",usecols=columnas)
 
+
 def eliminar_espacios_adicionales(cadena):
     if(type(cadena) == float):
         return "NO"
@@ -141,6 +142,7 @@ def addColumns(personal):
 
 if __name__ == '__main__':
     print("Todo bien prueba 1")
+    getFiles("shared/")
 
 """
 if __name__ == '__main__':
