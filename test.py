@@ -3,6 +3,7 @@ from datetime import datetime
 import re
 import os
 import time
+import tarfile
 
 
 def delete_old_logs(directory, file_extension=".log", days_old=7):
