@@ -21,13 +21,16 @@ jobs:
         echo "Vamos a lo importante...1"    
         #python test.py
         #wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
-        
+        tar -czvf TA_PersonalPlanta.tar.gz TA_PersonalPlanta.csv
+
+
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: shared-files
         path: |
           #TA_PersonalPlanta.csv
+          TA_PersonalPlanta.tar.gz
   build2:
     runs-on: ubuntu-latest
     strategy:
@@ -39,13 +42,15 @@ jobs:
         echo "Vamos a lo importante...1"    
         #python test.py
         wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContrata.csv > /dev/null
-        
+        tar -czvf TA_PersonalContrata.tar.gz TA_PersonalContrata.csv
+
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: shared-files
         path: |
-          TA_PersonalContrata.csv
+          #TA_PersonalContrata.csv
+          TA_PersonalContrata.tar.gz
   build3:
     runs-on: ubuntu-latest
     strategy:
@@ -57,13 +62,15 @@ jobs:
         echo "Vamos a lo importante...1"    
         #python test.py
         wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalCodigotrabajo.csv > /dev/null
-        
+        tar -czvf TA_PersonalCodigotrabajo.tar.gz TA_PersonalCodigotrabajo.csv
+
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: shared-files
         path: |
-          TA_PersonalCodigotrabajo.csv
+          #TA_PersonalCodigotrabajo.csv
+          TA_PersonalCodigotrabajo.tar.gz
   build4:
     runs-on: ubuntu-latest
     strategy:
@@ -75,13 +82,14 @@ jobs:
         echo "Vamos a lo importante...1"    
         #python test.py
         wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContratohonorarios.csv > /dev/null
-        
+        tar -czvf TA_PersonalContratohonorarios.tar.gz TA_PersonalContratohonorarios.csv
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: shared-files
         path: |
-          TA_PersonalContratohonorarios.csv
+          #TA_PersonalContratohonorarios.csv
+          TA_PersonalContratohonorarios.tar.gz
 
   cleanup:
     runs-on: ubuntu-latest
