@@ -162,6 +162,8 @@ if __name__ == '__main__':
         organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     print(2)
     #delete_old_logs(directory)
+
+    """
     df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
     df2 = addColumns(df2)
     print(3)
@@ -184,6 +186,7 @@ if __name__ == '__main__':
             pd.concat([organismo,aux]).to_excel(f"organismo/{i}.xlsx", index=False)
         except:
             pd.concat([organismo]).to_excel(f"organismo/{i}.xlsx", index=False)
+    """
     #delete_old_logs(directory)
     #df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     #df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
