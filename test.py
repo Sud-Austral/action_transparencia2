@@ -140,11 +140,11 @@ def addColumns(personal):
     personal["NOMBRECOMPLETO2"] = personal["NOMBRECOMPLETO"].apply(transformar_string) 
     return personal
 
-if __name__ == '__main__':
-    print("Todo bien prueba 1")
-    getFiles("shared/")
+#if __name__ == '__main__':
+#    print("Todo bien prueba 1")
+#    getFiles("shared/")
 
-"""
+
 if __name__ == '__main__':
     directory = "/home/runner/runners"
 
@@ -208,5 +208,5 @@ if __name__ == '__main__':
     #    organismo = personal[personal["organismo_nombre"] == i]
     #    organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     #print(7)
-"""
+
     
