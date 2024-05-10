@@ -8,4 +8,4 @@ PersonalContratohonorariosDICT    = deseadas+['remuliquida_mensual','tipo_pago',
 
 if __name__ == '__main__':
     df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    df.to_excel("TA_PersonalPlanta.csv", index=False)
+    df.to_csv("TA_PersonalPlanta.csv", index=False)
