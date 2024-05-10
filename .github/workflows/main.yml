@@ -26,6 +26,8 @@ jobs:
     - name: AUTOMATIZACIÓN
       run: |
         echo "Vamos a lo importante...1"    
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt 
         #python test.py
         wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
         python build1.py
