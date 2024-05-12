@@ -154,16 +154,21 @@ def saveParcial(df,columna):
 if __name__ == '__main__':
     directory = "/home/runner/runners"
     #df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,encoding="latin",usecols=PersonalPlantaDICT)
-    df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
+    try:    
+        df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,encoding="latin",usecols=PersonalPlantaDICT)
+        df1 = addColumns(df1)
+    except Exception as e:
+        print(e)
+
+    #df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
     #df3 = pd.read_csv("shared/TA_PersonalCodigotrabajo.csv", sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
     #df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     #df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
-    df1 = addColumns(df1)
-    df2 = addColumns(df2)
+    
+    #df2 = addColumns(df2)
     #df3 = addColumns(df3)
     #df4 = addColumns(df4)
-    merge = pd.concat([df1,df2])
+    #merge = pd.concat([df1,df2])
     #for i in merge["organismo_nombre"].unique():
     #    organismo = merge[merge["organismo_nombre"] == i]
     #    organismo.to_excel(f"organismo/{i}.xlsx", index=False)
