@@ -160,10 +160,10 @@ if __name__ == '__main__':
     #listaDF = [readCSV(name) for name in getFiles("shared")]
     
     #personal = pd.concat(listaDF)
-    df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    df1 = addColumns(df1)
-    df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
-    df2 = addColumns(df2)
+    #df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
+    #df1 = addColumns(df1)
+    #df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
+    #df2 = addColumns(df2)
 
     #merge = pd.concat([df1,df2])
 

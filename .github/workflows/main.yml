@@ -134,19 +134,19 @@ jobs:
 
       - name: AUTOMATIZACIÓN
         run: |
-          cd shared
-          tar -xzvf TA_PersonalPlanta.tar.gz
-          tar -xzvf TA_PersonalContrata.tar.gz
-          tar -xzvf TA_PersonalCodigotrabajo.tar.gz
-          tar -xzvf TA_PersonalContratohonorarios.tar.gz
-          ls
-          cd ..
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt   
+          #cd shared
+          #tar -xzvf TA_PersonalPlanta.tar.gz
+          #tar -xzvf TA_PersonalContrata.tar.gz
+          #tar -xzvf TA_PersonalCodigotrabajo.tar.gz
+          #tar -xzvf TA_PersonalContratohonorarios.tar.gz
+          #ls
+          #cd ..
+          #python -m pip install --upgrade pip
+          #pip install -r requirements.txt   
           echo "Primer"       
-          python test.py
+          #python test.py
           echo "Segundo"  
-          rm -r shared
+          #rm -r shared
       
       - name: Commit y push cambios
         uses: stefanzweifel/git-auto-commit-action@v2
