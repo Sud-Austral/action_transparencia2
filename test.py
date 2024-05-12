@@ -157,7 +157,15 @@ if __name__ == '__main__':
     df2 = pd.read_csv("shared2/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
     df3 = pd.read_csv("shared2/TA_PersonalCodigotrabajo.csv", sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
     df4 = pd.read_csv("shared2/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
-    
+    df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
+    df1 = addColumns(df1)
+    df2 = addColumns(df2)
+    df3 = addColumns(df3)
+    df4 = addColumns(df4)
+    merge = pd.concat([df1,df2])
+    for i in merge["organismo_nombre"].unique():
+        organismo = merge[merge["organismo_nombre"] == i]
+        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     # Llamar a la función para eliminar archivos de registro antiguos
     #delete_old_logs(directory)
     print(1)
