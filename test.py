@@ -153,10 +153,10 @@ def saveParcial(df,columna):
 
 if __name__ == '__main__':
     directory = "/home/runner/runners"
-    df1 = pd.read_csv("shared2/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    df2 = pd.read_csv("shared2/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
-    df3 = pd.read_csv("shared2/TA_PersonalCodigotrabajo.csv", sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
-    df4 = pd.read_csv("shared2/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
+    df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
+    df2 = pd.read_csv("shared/TA_PersonalContrata.csv", sep=";",encoding="latin",usecols=PersonalContrataDICT)
+    df3 = pd.read_csv("shared/TA_PersonalCodigotrabajo.csv", sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
+    df4 = pd.read_csv("shared/TA_PersonalContratohonorarios.csv", sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
     df1 = addColumns(df1)
     df2 = addColumns(df2)
