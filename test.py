@@ -162,13 +162,13 @@ if __name__ == '__main__':
     df2 = addColumns(df2)
     df3 = addColumns(df3)
     df4 = addColumns(df4)
-    merge = pd.concat([df1,df2])
-    for i in merge["organismo_nombre"].unique():
-        organismo = merge[merge["organismo_nombre"] == i]
-        organismo.to_excel(f"organismo/{i}.xlsx", index=False)
+    merge = pd.concat([df1,df2,df3,df4])
+    #for i in merge["organismo_nombre"].unique():
+    #    organismo = merge[merge["organismo_nombre"] == i]
+    #    organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     # Llamar a la función para eliminar archivos de registro antiguos
     #delete_old_logs(directory)
-    print(1)
+    print(len(merge))
     #listaDF = [readCSV(name) for name in getFiles("shared")]
     #personal = pd.concat(listaDF)
     #df1 = pd.read_csv("shared/TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
