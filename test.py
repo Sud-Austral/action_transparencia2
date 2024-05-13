@@ -165,6 +165,9 @@ if __name__ == '__main__':
         df4 = df4.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
         df4 = addColumns(df4)
         merge = pd.concat([df1,df2,df3,df4])
+        for i in merge["organismo_nombre"].unique():
+            organismo = merge[merge["organismo_nombre"] == i]
+            organismo.to_excel(f"organismo/{i}.xlsx", index=False)
     except Exception as e:
         print(e)
 
