@@ -76,9 +76,11 @@ def addColumns(personal):
     return personal
 
 if __name__ == '__main__':
-    df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    df = addColumns(df)
-    for i in df["organismo_nombre"].unique():
-        organismo = df[df["organismo_nombre"] == i]
-        organismo.to_excel(f"build1/{i}.xlsx", index=False)
+    #df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
+    df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin")
+    print(df.columns)
+    #df = addColumns(df)
+    #for i in df["organismo_nombre"].unique():
+    #    organismo = df[df["organismo_nombre"] == i]
+    #    organismo.to_excel(f"build1/{i}.xlsx", index=False)
     
