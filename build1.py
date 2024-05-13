@@ -5,7 +5,17 @@ import os
 import time
 import tarfile
 
+
+base = "https://www.cplt.cl/transparencia_activa/datoabierto/archivos/"
 deseadas =["Nombres","Paterno","Materno","organismo_nombre",'anyo', 'Mes','tipo_calificacionp']
+
+
+TA_PersonalPlanta                       = f"{base}TA_PersonalPlanta.csv"
+TA_PersonalContrata                     = f"{base}TA_PersonalContrata.csv"
+TA_PersonalCodigotrabajo                = f"{base}TA_PersonalCodigotrabajo.csv"
+TA_PersonalContratohonorarios           = f"{base}TA_PersonalContratohonorarios.csv"
+
+
 PersonalPlantaDICT                = deseadas+["remuliquida_mensual",'Tipo cargo', 'remuneracionbruta_mensual']
 PersonalContrataDICT              = deseadas+["remuliquida_mensual",'Tipo cargo','remuneracionbruta_mensual'] 
 PersonalCodigotrabajoDICT         = deseadas+["remuliquida_mensual",'Tipo cargo', 'remuneracionbruta_mensual']
@@ -77,7 +87,8 @@ def addColumns(personal):
 
 if __name__ == '__main__':
     #df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin")
+    chunk_size = 1024 * 1024
+    df = pd.read_csv(TA_PersonalPlanta, low_memory=False,sep=";",encoding="latin",chunksize=chunk_size)
     print(df.columns)
     #df = addColumns(df)
     #for i in df["organismo_nombre"].unique():
