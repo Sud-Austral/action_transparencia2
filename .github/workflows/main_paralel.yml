@@ -29,7 +29,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt 
         #python test.py
-        wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
+        wget --quota=1M https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
         python build1.py
         #tar -czvf TA_PersonalPlanta.tar.gz TA_PersonalPlanta.csv
         rm TA_PersonalPlanta.csv
@@ -64,7 +64,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt 
           #python test.py
-          wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContrata.csv > /dev/null
+          wget --quota=1M https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContrata.csv > /dev/null
           python build2.py
           #tar -czvf TA_PersonalContrata.tar.gz TA_PersonalContrata.csv
           rm TA_PersonalContrata.csv
@@ -88,7 +88,7 @@ jobs:
           echo "Vamos a lo importante...1"    
           python -m pip install --upgrade pip
           pip install -r requirements.txt 
-          wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalCodigotrabajo.csv > /dev/null
+          wget --quota=1M https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalCodigotrabajo.csv > /dev/null
           python build3.py
           #tar -czvf TA_PersonalCodigotrabajo.tar.gz TA_PersonalCodigotrabajo.csv
           rm TA_PersonalCodigotrabajo.csv
@@ -112,7 +112,7 @@ jobs:
           echo "Vamos a lo importante...1"    
           python -m pip install --upgrade pip
           pip install -r requirements.txt 
-          wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContratohonorarios.csv > /dev/null
+          wget --quota=1M https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContratohonorarios.csv > /dev/null
           #tar -czvf TA_PersonalContratohonorarios.tar.gz TA_PersonalContratohonorarios.csv
           python build4.py
           rm TA_PersonalContratohonorarios.csv
