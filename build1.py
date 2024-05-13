@@ -1,4 +1,9 @@
 import pandas as pd
+from datetime import datetime
+import re
+import os
+import time
+import tarfile
 
 deseadas =["Nombres","Paterno","Materno","organismo_nombre",'anyo', 'Mes','tipo_calificacionp']
 PersonalPlantaDICT                = deseadas+["remuliquida_mensual",'Tipo cargo', 'remuneracionbruta_mensual']
