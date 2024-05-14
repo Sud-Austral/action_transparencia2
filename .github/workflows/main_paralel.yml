@@ -148,6 +148,16 @@ jobs:
       with:
         name: shared-files2
         path: shared_2
+    - name: Download artifact3 
+      uses: actions/download-artifact@v2
+      with:
+        name: shared-files3
+        path: shared_3
+    - name: Download artifact4
+      uses: actions/download-artifact@v2
+      with:
+        name: shared-files4
+        path: shared_4
     - name: AUTOMATIZACIÓN
       run: |
         echo "Vamos a lo importante...1"    
