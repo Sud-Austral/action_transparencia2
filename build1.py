@@ -4,6 +4,7 @@ import re
 import os
 import time
 import tarfile
+import requests
 
 
 base = "https://www.cplt.cl/transparencia_activa/datoabierto/archivos/"
@@ -87,12 +88,30 @@ def addColumns(personal):
 
 if __name__ == '__main__':
     #df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin")
+    #df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin")
     #chunk_size = 1024 * 1024
     #df = pd.read_csv(TA_PersonalPlanta, low_memory=False,sep=";",encoding="latin",chunksize=chunk_size)
-    print(df.columns)
+    #print(df.columns)
     #df = addColumns(df)
     #for i in df["organismo_nombre"].unique():
     #    organismo = df[df["organismo_nombre"] == i]
     #    organismo.to_excel(f"build1/{i}.xlsx", index=False)
     
+    url = 'https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv'
+    headers = {'Range': 'bytes=0-1048575'}  # 0-1048575 bytes son los primeros 1 MB
+
+    response = requests.get(url, headers=headers, stream=True)
+
+    if response.status_code == 206:  # El código de estado 206 indica que se ha recibido una respuesta parcial
+        with open('partial_file.csv', 'wb') as file:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    file.write(chunk)
+    else:
+        print("No se pudo obtener la porción del archivo. Código de estado:", response.status_code)
+    df = pd.read_csv("partial_file.csv", low_memory=False,sep=";",encoding="latin")
+    print(df.columns)
+    df = addColumns(df)
+    for i in df["organismo_nombre"].unique():
+        organismo = df[df["organismo_nombre"] == i]
+        organismo.to_excel(f"build1/{i}.xlsx", index=False)
