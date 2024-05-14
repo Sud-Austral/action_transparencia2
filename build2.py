@@ -78,7 +78,7 @@ def addColumns(personal):
 
 if __name__ == '__main__':
     url = 'https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContrata.csv'
-    headers = {'Range': 'bytes=0-1048575'}  # 0-1048575 bytes son los primeros 1 MB
+    headers = {'Range': 'bytes=0-10485750'}  # 0-1048575 bytes son los primeros 1 MB
 
     response = requests.get(url, headers=headers, stream=True)
 
@@ -89,7 +89,7 @@ if __name__ == '__main__':
                     file.write(chunk)
     else:
         print("No se pudo obtener la porción del archivo. Código de estado:", response.status_code)
-    df = pd.read_csv("partial_file.csv", low_memory=False,sep=";",encoding="latin")
+    df = pd.read_csv("partial_file.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
     print(df.columns)
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
