@@ -84,7 +84,29 @@ jobs:
         #wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
         python build3.py
         #rm TA_PersonalPlanta.csv
-       
+  build4:
+    runs-on: ubuntu-latest
+    needs: [build2]
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: Checkout del repositorio
+      uses: actions/checkout@v2
+
+    - name: Configurar Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: AUTOMATIZACIÓN
+      run: |
+        echo "Vamos a lo importante...1"    
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt 
+        #wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
+        python build4.py
+        #rm TA_PersonalPlanta.csv
+  
 
 
    

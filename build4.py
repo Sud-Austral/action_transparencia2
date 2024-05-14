@@ -76,7 +76,22 @@ def addColumns(personal):
     return personal
 
 if __name__ == '__main__':
-    df = pd.read_csv(f"TA_PersonalContratohonorarios.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
+
+    url = 'https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContratohonorarios.csv'
+    headers = {'Range': 'bytes=0-10485750'}  # 0-1048575 bytes son los primeros 1 MB
+
+    response = requests.get(url, headers=headers, stream=True)
+
+    if response.status_code == 206:  # El código de estado 206 indica que se ha recibido una respuesta parcial
+        with open('partial_file.csv', 'wb') as file:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    file.write(chunk)
+    else:
+        print("No se pudo obtener la porción del archivo. Código de estado:", response.status_code)
+    df = pd.read_csv("partial_file.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
+    print(df.columns)
+    df = df.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
         organismo = df[df["organismo_nombre"] == i]
