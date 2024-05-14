@@ -109,7 +109,7 @@ if __name__ == '__main__':
                     file.write(chunk)
     else:
         print("No se pudo obtener la porción del archivo. Código de estado:", response.status_code)
-    df = pd.read_csv("partial_file.csv", low_memory=False,sep=";",encoding="latin")
+    df = pd.read_csv("partial_file.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
     print(df.columns)
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
