@@ -141,7 +141,11 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v2
       with:
-        name: shared-files
+        name: |
+          shared-files1
+          shared-files2
+          shared-files3
+          shared-files4
         path: shared
     - name: AUTOMATIZACIÓN
       run: |
