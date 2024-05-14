@@ -87,7 +87,7 @@ def addColumns(personal):
 
 if __name__ == '__main__':
     #df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin)
+    df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin")
     #chunk_size = 1024 * 1024
     #df = pd.read_csv(TA_PersonalPlanta, low_memory=False,sep=";",encoding="latin",chunksize=chunk_size)
     print(df.columns)

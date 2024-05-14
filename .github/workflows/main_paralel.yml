@@ -30,7 +30,7 @@ jobs:
         pip install -r requirements.txt 
         #python test.py
         #wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
-        python build1.py
+        #python build1.py
         #tar -czvf TA_PersonalPlanta.tar.gz TA_PersonalPlanta.csv
         #rm TA_PersonalPlanta.csv
     - name: Commit y push cambios
@@ -45,109 +45,4 @@ jobs:
 
 
    
-  build2:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.7]
-    steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v2
-
-      - name: Configurar Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.7
-      - name: AUTOMATIZACIÓN
-        run: |
-          echo "Vamos a lo importante...1"    
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt 
-          #python test.py
-          wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContrata.csv > /dev/null
-          python build2.py
-          #tar -czvf TA_PersonalContrata.tar.gz TA_PersonalContrata.csv
-          rm TA_PersonalContrata.csv
-
-  build3:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.7]
-    steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v2
-
-      - name: Configurar Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.7
-    
-      - name: AUTOMATIZACIÓN
-        run: |
-          echo "Vamos a lo importante...1"    
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt 
-          wget --quota=1M https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalCodigotrabajo.csv > /dev/null
-          python build3.py
-          #tar -czvf TA_PersonalCodigotrabajo.tar.gz TA_PersonalCodigotrabajo.csv
-          rm TA_PersonalCodigotrabajo.csv
-
-  build4:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.7]
-    steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v2
-
-      - name: Configurar Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.7
-      
-      - name: AUTOMATIZACIÓN
-        run: |
-          echo "Vamos a lo importante...1"    
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt 
-          wget --quota=1M https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalContratohonorarios.csv > /dev/null
-          #tar -czvf TA_PersonalContratohonorarios.tar.gz TA_PersonalContratohonorarios.csv
-          python build4.py
-          rm TA_PersonalContratohonorarios.csv
-
-  unir:
-    runs-on: ubuntu-latest
-    needs: [build4]
-    strategy:
-      matrix:
-        python-version: [3.7]
-    steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v2
-
-      - name: Configurar Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.7
-
-      - name: AUTOMATIZACIÓN
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt   
-          echo "Primer"       
-          #python test.py
-          echo "Segundo"  
-      
-      - name: Commit y push cambios
-        uses: stefanzweifel/git-auto-commit-action@v2
-        with:
-          commit_message: "Actualizacion"
-          branch: main
-          commit_user_name: Actions Bot
-          commit_user_email: lmonsalve22@gmail.com
-          commit_author: DataIntelligence BOT <lmonsalve22@gmail.com>
-          push_options: '--force'
-
    
