@@ -98,7 +98,7 @@ if __name__ == '__main__':
     #    organismo.to_excel(f"build1/{i}.xlsx", index=False)
     
     url = 'https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv'
-    headers = {'Range': 'bytes=0-10485750'}  # 0-1048575 bytes son los primeros 1 MB
+    headers = {'Range': 'bytes=0-104857600'}  # 0-1048575 bytes son los primeros 1 MB
 
     response = requests.get(url, headers=headers, stream=True)
 
