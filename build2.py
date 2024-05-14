@@ -4,6 +4,7 @@ import re
 import os
 import time
 import tarfile
+import requests
 
 deseadas =["Nombres","Paterno","Materno","organismo_nombre",'anyo', 'Mes','tipo_calificacionp']
 PersonalPlantaDICT                = deseadas+["remuliquida_mensual",'Tipo cargo', 'remuneracionbruta_mensual']
@@ -93,5 +94,5 @@ if __name__ == '__main__':
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
         organismo = df[df["organismo_nombre"] == i]
-        organismo.to_excel(f"build1/{i}.xlsx", index=False)
+        organismo.to_excel(f"build2/{i}.xlsx", index=False)
     
