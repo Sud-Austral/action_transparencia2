@@ -30,7 +30,7 @@ jobs:
         pip install -r requirements.txt 
         #python test.py
         #wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
-        #python build1.py
+        python build1.py
         #tar -czvf TA_PersonalPlanta.tar.gz TA_PersonalPlanta.csv
         #rm TA_PersonalPlanta.csv
     - name: Commit y push cambios
