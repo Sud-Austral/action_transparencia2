@@ -34,7 +34,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: shared-files
+        name: shared-files1
         path: |
           build1
     
@@ -63,7 +63,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: shared-files
+        name: shared-files2
         path: |
           build2
       
@@ -92,7 +92,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: shared-files
+        name: shared-files3
         path: |
           build3
       
@@ -120,7 +120,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: shared-files
+        name: shared-files4
         path: |
           build4
       
