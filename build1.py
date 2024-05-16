@@ -86,6 +86,20 @@ def addColumns(personal):
     personal["NOMBRECOMPLETO2"] = personal["NOMBRECOMPLETO"].apply(transformar_string) 
     return personal
 
+url = 'https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv'
+output_file = 'TA_PersonalPlanta.csv'
+chunk_size = 1048576  # 1 MB
+
+def download_file(url, output_file, chunk_size):
+    with requests.get(url, stream=True) as response:
+        response.raise_for_status()
+        with open(output_file, 'wb') as file:
+            for chunk in response.iter_content(chunk_size=chunk_size):
+                file.write(chunk)
+                print(f"Downloaded {file.tell()} bytes")
+    
+    print(f"Download complete. File saved as {output_file}")
+
 if __name__ == '__main__':
     #df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
     #df = pd.read_csv(f"TA_PersonalPlanta.csv", low_memory=False,sep=";",encoding="latin")
@@ -99,8 +113,8 @@ if __name__ == '__main__':
     
     url = 'https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv'
     headers = {'Range': 'bytes=0-1004857600'}  # 0-1048575 bytes son los primeros 1 MB
-
-    response = requests.get(url)#, headers=headers, stream=True)
+"""
+    response = requests.get(url, headers=headers, stream=True)
 
     if response.status_code == 200:  # El código de estado 206 indica que se ha recibido una respuesta parcial
         with open('partial_file.csv', 'wb') as file:
@@ -109,9 +123,16 @@ if __name__ == '__main__':
                     file.write(chunk)
     else:
         print("No se pudo obtener la porción del archivo. Código de estado:", response.status_code)
-    df = pd.read_csv("partial_file.csv", low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
-    print(df.columns)
+   
+"""
+    download_file(url, output_file, chunk_size)
+    df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
         organismo = df[df["organismo_nombre"] == i]
         organismo.to_excel(f"build1/{i}.xlsx", index=False)
+    if os.path.exists(output_file):
+        os.remove(output_file)
+        print(f"File {output_file} has been deleted.")
+    else:
+        print(f"File {output_file} not found.")
