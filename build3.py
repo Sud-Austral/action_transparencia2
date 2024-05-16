@@ -93,20 +93,20 @@ def download_file(url, output_file, chunk_size):
 
 if __name__ == '__main__':
 
-    """
-    url = 'https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalCodigotrabajo.csv'
-    headers = {'Range': 'bytes=0-1004857600'}  # 0-1048575 bytes son los primeros 1 MB
+"""
+url = 'https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalCodigotrabajo.csv'
+headers = {'Range': 'bytes=0-1004857600'}  # 0-1048575 bytes son los primeros 1 MB
 
-    response = requests.get(url)#, headers=headers, stream=True)
+response = requests.get(url)#, headers=headers, stream=True)
 
-    if response.status_code == 200:  # El código de estado 206 indica que se ha recibido una respuesta parcial
-        with open('partial_file.csv', 'wb') as file:
-            for chunk in response.iter_content(chunk_size=8192):
-                if chunk:
-                    file.write(chunk)
-    else:
-        print("No se pudo obtener la porción del archivo. Código de estado:", response.status_code)
-    """
+if response.status_code == 200:  # El código de estado 206 indica que se ha recibido una respuesta parcial
+    with open('partial_file.csv', 'wb') as file:
+        for chunk in response.iter_content(chunk_size=8192):
+            if chunk:
+                file.write(chunk)
+else:
+    print("No se pudo obtener la porción del archivo. Código de estado:", response.status_code)
+"""
     download_file(url, output_file, chunk_size)
     df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalCodigotrabajoDICT)
     
