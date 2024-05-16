@@ -113,8 +113,9 @@ if __name__ == '__main__':
     
     #url = 'https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv'
     #headers = {'Range': 'bytes=0-1004857600'}  # 0-1048575 bytes son los primeros 1 MB
-    download_file(url, output_file, chunk_size)
+    #download_file(url, output_file, chunk_size)
     df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalPlantaDICT)
+    print(df.columns)
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
         organismo = df[df["organismo_nombre"] == i]
