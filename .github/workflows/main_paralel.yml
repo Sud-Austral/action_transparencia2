@@ -175,6 +175,11 @@ jobs:
         #wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
         #python build4.py
         #rm TA_PersonalPlanta.csv
+        rm -r shared_1
+        rm -r shared_2
+        rm -r shared_3
+        rm -r shared_4
+        echo "hola" > termino.txt
     - name: Commit y push cambios
       uses: stefanzweifel/git-auto-commit-action@v2
       with:
