@@ -180,6 +180,7 @@ jobs:
         rm -r shared_3
         rm -r shared_4
         echo "hola" > termino.txt
+        
     - name: Commit y push cambios
       uses: stefanzweifel/git-auto-commit-action@v2
       with:
