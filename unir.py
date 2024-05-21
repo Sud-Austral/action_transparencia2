@@ -6,7 +6,7 @@ if __name__ == '__main__':
     print("Todo bien por aki")
     df = pd.read_excel("organismos.xlsx")
     
-    for i in df["organismo_nombr"]:
+    for i in df["organismo_nombre"]:
         print(i)
         df1 = pd.DataFrame()
         df2 = pd.DataFrame()
