@@ -173,7 +173,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt 
         #wget https://www.cplt.cl/transparencia_activa/datoabierto/archivos/TA_PersonalPlanta.csv > /dev/null
-        #python build4.py
+        python unir.py
         #rm TA_PersonalPlanta.csv
         rm -r shared_1
         rm -r shared_2
