@@ -92,8 +92,8 @@ def download_file(url, output_file, chunk_size):
     print(f"Download complete. File saved as {output_file}")
 
 if __name__ == '__main__':
-
-    download_file(url, output_file, chunk_size)
+    output_file = "TA_PersonalPlanta.csv"
+    #download_file(url, output_file, chunk_size)
     df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
