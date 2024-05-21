@@ -95,6 +95,7 @@ if __name__ == '__main__':
     output_file = "TA_PersonalPlanta.csv"
     #download_file(url, output_file, chunk_size)
     df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
+    print(df.columns)
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
         organismo = df[df["organismo_nombre"] == i]
