@@ -5,6 +5,7 @@ import os
 if __name__ == '__main__':
     print("Todo bien por aki")
     df = pd.read_excel("organismos.xlsx")
+    print(os.listdir("."))
     print(os.listdir("shared_1"))
     print(os.listdir("shared_2"))
     print(os.listdir("shared_3"))
