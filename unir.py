@@ -1,6 +1,23 @@
 import pandas as pd
 import os
 
+def mostrar_archivos_y_peso(carpeta):
+    # Recorre todos los archivos en la carpeta
+    for archivo in os.listdir(carpeta):
+        # Crea la ruta completa al archivo
+        ruta_completa = os.path.join(carpeta, archivo)
+        
+        # Verifica si es un archivo (y no una carpeta)
+        if os.path.isfile(ruta_completa):
+            # Obtiene el tamaño del archivo en bytes
+            tamaño_bytes = os.path.getsize(ruta_completa)
+            
+            # Convierte el tamaño a megabytes
+            tamaño_megas = tamaño_bytes / (1024 * 1024)
+            
+            # Muestra el nombre del archivo y su tamaño en megabytes
+            print(f"Archivo: {archivo}, Tamaño: {tamaño_megas:.2f} MB")
+
 
 if __name__ == '__main__':
     print("Todo bien por aki")
@@ -29,6 +46,7 @@ if __name__ == '__main__':
         concat = pd.concat([df1,df2,df3,df4])
         concat.to_excel(f"unir/{i}.xlsx", index=False)
     print("Termino de guardar en excel")
+    mostrar_archivos_y_peso("unir")
 
         
         
