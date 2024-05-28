@@ -93,8 +93,11 @@ def download_file(url, output_file, chunk_size):
 
 if __name__ == '__main__':
     output_file = "TA_PersonalContrata.csv"
+    print(1)
     download_file(url, output_file, chunk_size)
+    print(2)
     df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
+    print(3)
     print(df.columns)
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
