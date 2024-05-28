@@ -81,7 +81,7 @@ output_file = 'TA_PersonalContratohonorarios.csv'
 chunk_size = 1048576  # 1 MB
 
 def download_file(url, output_file, chunk_size):
-    with requests.get(url, stream=True) as response:
+    with requests.get(url, stream=True,, verify=False) as response:
         response.raise_for_status()
         with open(output_file, 'wb') as file:
             for chunk in response.iter_content(chunk_size=chunk_size):
