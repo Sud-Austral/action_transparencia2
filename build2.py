@@ -92,7 +92,7 @@ def download_file(url, output_file, chunk_size):
     print(f"Download complete. File saved as {output_file}")
 
 if __name__ == '__main__':
-    output_file = "TA_PersonalPlanta.csv"
+    output_file = "TA_PersonalContrata.csv"
     #download_file(url, output_file, chunk_size)
     df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
     print(df.columns)
