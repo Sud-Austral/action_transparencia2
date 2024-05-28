@@ -91,7 +91,6 @@ def download_file(url, output_file, chunk_size):
     print(f"Download complete. File saved as {output_file}")
 
 if __name__ == '__main__':
-
     download_file(url, output_file, chunk_size)
     df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContratohonorariosDICT)
     df = df.rename(columns={'remuneracionbruta': 'remuneracionbruta_mensual'})
