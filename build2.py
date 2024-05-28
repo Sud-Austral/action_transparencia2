@@ -82,7 +82,7 @@ output_file = 'TA_PersonalContrata.csv'
 chunk_size = 1048576  # 1 MB
 
 def download_file(url, output_file, chunk_size):
-    with requests.get(url, stream=True) as response:
+    with requests.get(url, stream=True, verify=False) as response:
         response.raise_for_status()
         with open(output_file, 'wb') as file:
             for chunk in response.iter_content(chunk_size=chunk_size):
@@ -93,7 +93,7 @@ def download_file(url, output_file, chunk_size):
 
 if __name__ == '__main__':
     output_file = "TA_PersonalContrata.csv"
-    #download_file(url, output_file, chunk_size)
+    download_file(url, output_file, chunk_size)
     df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
     print(df.columns)
     df = addColumns(df)
