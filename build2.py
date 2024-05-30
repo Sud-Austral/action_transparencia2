@@ -91,10 +91,27 @@ def download_file(url, output_file, chunk_size):
     
     print(f"Download complete. File saved as {output_file}")
 
+
+def download_file2(url, output_file, chunk_size):
+    with requests.get(url, stream=True, verify=False) as response:
+        response.raise_for_status()
+        with open(output_file, 'wb') as file:
+            total_downloaded = 0
+            max_size = 10 * 1024 * 1024  # 10 MB in bytes
+            for chunk in response.iter_content(chunk_size=chunk_size):
+                if chunk:
+                    total_downloaded += len(chunk)
+                    if total_downloaded > max_size:
+                        file.write(chunk[:max_size - (total_downloaded - len(chunk))])
+                        break
+                    file.write(chunk)
+                    print(f"Downloaded {file.tell()} bytes")
+            print("Download complete.")
+
 if __name__ == '__main__':
     output_file = "TA_PersonalContrata.csv"
     print(1)
-    download_file(url, output_file, chunk_size)
+    download_file2(url, output_file, chunk_size)
     print(2)
     df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
     print(3)
