@@ -27,7 +27,7 @@ if __name__ == '__main__':
     #print(os.listdir("shared_2"))
     #print(os.listdir("shared_3"))
     #print(os.listdir("shared_4"))
-    for i in df["organismo_nombre"][:500]:
+    for i in df["organismo_nombre"][:5000]:
         print(i)
         df1 = pd.DataFrame()
         df2 = pd.DataFrame()
