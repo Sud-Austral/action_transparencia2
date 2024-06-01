@@ -97,7 +97,7 @@ def download_file2(url, output_file, chunk_size):
         response.raise_for_status()
         with open(output_file, 'wb') as file:
             total_downloaded = 0
-            max_size = 10000 * 1024 * 1024  # 10 MB in bytes
+            max_size = 5000 * 1024 * 1024  # 10 MB in bytes
             for chunk in response.iter_content(chunk_size=chunk_size):
                 if chunk:
                     total_downloaded += len(chunk)
