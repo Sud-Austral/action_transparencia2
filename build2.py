@@ -97,7 +97,7 @@ def download_file2(url, output_file, chunk_size):
         response.raise_for_status()
         with open(output_file, 'wb') as file:
             total_downloaded = 0
-            max_size = 5000 * 1024 * 1024  # 10 MB in bytes
+            max_size = 8000 * 1024 * 1024  # 10 MB in bytes
             for chunk in response.iter_content(chunk_size=chunk_size):
                 if chunk:
                     total_downloaded += len(chunk)
@@ -111,11 +111,8 @@ def download_file2(url, output_file, chunk_size):
 if __name__ == '__main__':
     output_file = "TA_PersonalContrata.csv"
     print(1)
-    download_file2(url, output_file, chunk_size)
-    print(2)
-    df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
-    print(3)
-    print(df.columns)
+    download_file2(url, output_file, chunk_size)    
+    df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)    
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
         organismo = df[df["organismo_nombre"] == i]
