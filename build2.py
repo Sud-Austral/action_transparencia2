@@ -111,8 +111,9 @@ def download_file2(url, output_file, chunk_size):
 if __name__ == '__main__':
     output_file = "TA_PersonalContrata.csv"
     print(1)
-    download_file2(url, output_file, chunk_size)    
-    df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)    
+    #download_file2(url, output_file, chunk_size)    
+    #df = pd.read_csv(output_file, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)    
+    df = pd.read_csv(url, low_memory=False,sep=";",encoding="latin",usecols=PersonalContrataDICT)
     df = addColumns(df)
     for i in df["organismo_nombre"].unique():
         organismo = df[df["organismo_nombre"] == i]
